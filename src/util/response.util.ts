@@ -24,4 +24,8 @@ export class ResponseEntity <T> {
     static badRequest<T> (message: string, data: T): ResponseEntity<T> {
         return new ResponseEntity(false, message, data, HttpStatus.BAD_REQUEST);
     }
+
+    static created<T> (message: string, data: T): ResponseEntity<T> {
+        return new ResponseEntity(true, message, data, HttpStatus.CREATED);
+    }
 }
