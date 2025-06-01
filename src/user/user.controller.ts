@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Put, Req } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { User } from "src/entities/user.entity";
 import { ResponseEntity } from "src/util/response.util";
@@ -22,6 +22,13 @@ export class UserController {
             return ResponseEntity.ok("Successfully obtained user!!! 🎉🎉🎉", user);
         }
         return ResponseEntity.notFound("Failed to obtain user!!! 😔💔💔", null);
+    }
+
+    @Get("/me")
+    @HttpCode(HttpStatus.OK)
+    async getCurrentUser (@Req() req: any): Promise<ResponseEntity<User>> {
+        const email: string = req.user;
+        return ResponseEntity.ok("Successfully obtained the current user!!!", await this.userService.getUserByEmail(email));
     }
 
     @Put("/update/:id")
