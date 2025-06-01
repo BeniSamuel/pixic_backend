@@ -13,6 +13,10 @@ export class Booking {
     user: User;
 
     @Column({nullable: false})
+    @ManyToOne(() => User, (user) => user.id)
+    booker: User;
+
+    @Column({nullable: false})
     details: string;
 
     @Column({type:"date", nullable: false, default: Date.now()})
