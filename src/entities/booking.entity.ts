@@ -25,9 +25,11 @@ export class Booking {
     @Column({type: "enum", enum: Status, default: Status.PENDING})
     status: Status;
 
-    constructor (user: User, details: string, bookingDate: Date) {
+    constructor (user: User, booker: User, details: string, bookingDate: Date, status: Status) {
         this.user = user;
+        this.booker = booker;
         this.details = details;
         this.bookingDate = bookingDate;
+        this.status = status;
     }
 }
