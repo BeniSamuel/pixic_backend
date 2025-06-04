@@ -20,6 +20,9 @@ export class Booking {
     details: string;
 
     @Column({type:"date", nullable: false, default: Date.now()})
+    createdDate: Date;
+
+    @Column({type:"date", nullable: false})
     bookingDate: Date;
 
     @Column({type: "enum", enum: Status, default: Status.PENDING})
