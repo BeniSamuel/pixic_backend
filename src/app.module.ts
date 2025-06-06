@@ -6,6 +6,9 @@ import { User } from './entities/user.entity';
 import { Booking } from './entities/booking.entity';
 import { Message } from './entities/message.entity';
 import { AuthModule } from './auth/auth.module';
+import { BookingModule } from './booking/booking.module';
+import { NotificationModule } from './notification/notification.module';
+import { HistoryModule } from './history/history.module';
 
 @Module({
   imports: [
@@ -20,13 +23,16 @@ import { AuthModule } from './auth/auth.module';
       username: 'postgres',
       password: 'beni@ish',
       database: 'pixic',
-      entities: [User],
+      entities: [User, Message, Booking, Notification, History],
       synchronize: true, // Set to false in production
       logging: true,
     }),
     // Other import modules can be added here
     UserModule,
-    AuthModule
+    AuthModule,
+    BookingModule,
+    NotificationModule,
+    HistoryModule
   ]
 })
 export class AppModule {}
