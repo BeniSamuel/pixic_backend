@@ -37,7 +37,32 @@ export class HistoryService {
     }
 
     async updateHistory (id: number, historyDto: HistoryDto): Promise<History> {
+        const history: History = await this.getHistoryById(id);
+        if (!history) {
+            return null;
+        }
+
+        const user: User = await this.userService.getUserById(historyDto.user_id);
+        if (!user) {
+            return null;
+        }
+        history.user = user;
+        history.action = historyDto.action;
+        history.details = historyDto.details;
+        history.timestamp = new Date();
         
+        return this.historyRepository.save(history);
     }
+
+    async deleteHistory (id: number): Promise<Boolean> {
+        const history: History = await this.getHistoryById(id);
+        if (!history) {
+            return false;
+        }
+
+        this.historyRepository.delete(history);
+        return true;
+    }
+
 
 }
